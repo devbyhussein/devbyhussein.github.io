@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<!-- ================================================================
+     HUSSEIN OBEID — PORTFOLIO (single file: index.html)
+     Stack: HTML + Tailwind CSS v4 (CDN) + Vanilla JS. AR/EN, RTL/LTR.
+     BEFORE PUBLISHING — edit these:
+       1. PHOTO       put your picture next to this file as: hussein.webp
+       2. CONFIG      WhatsApp number, email, socials, project links
+                      (search "CONFIG" inside the <script> at the bottom)
+       3. STATS       hero numbers (24 / 18 / 3) in the HTML
+       4. SEO         <title>, meta description, og tags below
+     ================================================================ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حسين عبيد | مطوّر واجهات أمامية وصفحات هبوط</title>
+<meta name="description" id="metaDesc" content="حسين عبيد — مطوّر واجهات أمامية متخصص في صفحات هبوط سريعة التحويل، دقيقة التفاصيل ومتوافقة مع كل الشاشات.">
+<meta name="theme-color" content="#05060a">
+<meta property="og:type" content="website">
+<meta property="og:title" id="ogTitle" content="حسين عبيد — مطوّر واجهات أمامية">
+<meta property="og:description" id="ogDesc" content="صفحات هبوط عالية التحويل — سريعة، دقيقة، ومتجاوبة مع كل الشاشات.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2305060a'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='%23c9f24f' stroke-width='2.5'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='28' font-weight='900' fill='%23c9f24f' text-anchor='middle'%3E.%3C/text%3E%3Ctext x='24' y='44' font-family='Arial' font-size='30' font-weight='900' fill='%23c9f24f' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<script>
+/* language BEFORE first paint + load ONLY the needed font (perf) */
+(function(){try{var s=localStorage.getItem("ho:lang");
+var l=s||((navigator.languages&&navigator.languages[0]||navigator.language||"en").toLowerCase().indexOf("ar")===0?"ar":"en");
+document.documentElement.lang=l;document.documentElement.dir=(l==="ar"?"rtl":"ltr");
+document.write('<link rel="stylesheet" id="font-'+l+'" href="https://fonts.googleapis.com/css2?family='+(l==="ar"?"Cairo:wght@200..1000":"Space+Grotesk:wght@300..700")+'&display=swap">');
+}catch(e){document.write('<link rel="stylesheet" id="font-en" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap">');}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style type="text/tailwindcss">
+@theme {
+  --color-ink:#05060a; --color-card:#0c0e15; --color-panel:#10131c;
+  --color-acid:#c9f24f; --color-grape:#8b5cf6;
+  --font-grot:"Space Grotesk","Cairo",sans-serif;
+  --font-ar:"Cairo","Space Grotesk",sans-serif;
+}
+</style>
+
+<style>
+/* ================= BASE ================= */
+:root{--ink:#05060a;--card:#0c0e15;--panel:#10131c;--acid:#c9f24f;--grape:#8b5cf6;--line:rgba(255,255,255,.08)}
+html{font-family:"Space Grotesk",system-ui,sans-serif;scroll-behavior:smooth}
+html[lang="ar"]{font-family:"Cairo",system-ui,sans-serif}
+html,body{overflow-x:hidden}
+body{background:var(--ink);color:#b9bec9;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acid);color:#05060a}
+/* big render win: below-the-fold sections skip layout+paint until needed */
+#services,#work,#process,#contact{content-visibility:auto;contain-intrinsic-size:auto 1200px}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--acid),var(--grape));border-radius:99px}
+section{scroll-margin-top:5.5rem}
+img{max-width:100%}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  [data-reveal]{opacity:1!important;transform:none!important}
+}
+/* film grain (static tile = cheap) */
+.noise::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grad-text{background:linear-gradient(115deg,#ecffb0 0%,var(--acid) 45%,#54e6a8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stroke-text{-webkit-text-stroke:1px rgba(255,255,255,.14);color:transparent}
+html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.06)}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 40%,transparent 100%);mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 40%,transparent 100%)}
+.orb{position:absolute;border-radius:9999px;pointer-events:none}
+.orb-a{background:radial-gradient(circle,rgba(201,242,79,.16),transparent 65%)}
+.orb-b{background:radial-gradient(circle,rgba(139,92,246,.17),transparent 65%)}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(4vw,-5vh,0) scale(1.15)}}
+.drift{animation:drift 16s ease-in-out infinite alternate}
+.drift-rev{animation:drift 20s ease-in-out infinite alternate-reverse}
+/* ================= MOTIONS ================= */
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+.spin-slow{animation:spinSlow 16s linear infinite}
+@media (hover:none){.drift,.drift-rev{animation:none}} /* static orbs on touch devices = zero GPU cost */
+@keyframes floaty{from{transform:translateY(6px)}to{transform:translateY(-10px)}}
+.float{animation:floaty 5.5s ease-in-out infinite alternate}
+.float-d{animation:floaty 7s ease-in-out infinite alternate-reverse}
+[data-reveal]{opacity:0;transform:translateY(28px) scale(.985)}
+[data-reveal].in-view{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}
+@keyframes scrolldot{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(13px)}}
+.scroll-dot{width:4px;height:4px;border-radius:99px;background:var(--acid);animation:scrolldot 1.8s ease-in-out infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.014);padding-block:1rem}
+.marq-track{position:relative;z-index:1;display:flex;width:max-content;animation:marq 28s linear infinite}
+.marquee:hover .marq-track{animation-play-state:paused}
+.marq-in{display:flex;align-items:center;gap:2.4rem;padding-inline:1.2rem;white-space:nowrap}
+.marq-in b{font-family:"Space Grotesk","Cairo",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.09em;color:#8b8d94}
+html[lang="ar"] .marq-in b{letter-spacing:0;font-size:1rem;color:#8b8d94}
+.marq-in .star{width:.55rem;height:.55rem;flex:none;background:var(--acid);transform:rotate(45deg);border-radius:2px}
+@keyframes waRing{from{transform:scale(1);opacity:.65}to{transform:scale(1.6);opacity:0}}
+.wa-ring{position:absolute;inset:0;border-radius:9999px;border:2px solid rgba(37,211,102,.55);opacity:0;animation:waRing 2s ease-out infinite;pointer-events:none}
+/* ================= COMPONENTS ================= */
+.sec-eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.72rem;letter-spacing:.3em;color:var(--acid);font-weight:700;text-transform:uppercase;margin-bottom:.75rem}
+.sec-eyebrow::before{content:"";width:2.4rem;height:2px;border-radius:99px;background:linear-gradient(90deg,var(--acid),transparent)}
+.sec-title{font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.12}
+html[lang="ar"] .sec-title{letter-spacing:0;line-height:1.25}
+.hero-name{font-weight:900;letter-spacing:-.03em;line-height:1.02}
+html[lang="ar"] .hero-name{letter-spacing:0;line-height:1.2}
+.icon-tile{display:grid;place-items:center;width:3.1rem;height:3.1rem;border-radius:1rem;background:linear-gradient(135deg,rgba(201,242,79,.14),rgba(139,92,246,.14));border:1px solid rgba(201,242,79,.18);color:var(--acid);transition:transform .35s cubic-bezier(.2,.8,.3,1.2),background .35s}
+.group:hover .icon-tile{transform:translateY(-3px) rotate(-5deg);background:linear-gradient(135deg,rgba(201,242,79,.28),rgba(139,92,246,.28))}
+.card-glow{position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(480px 220px at 85% -10%,rgba(201,242,79,.09),transparent 70%)}
+.group:hover .card-glow{opacity:1}
+.live-btn{display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;border:1px solid rgba(201,242,79,.3);background:rgba(201,242,79,.1);padding:.5rem 1rem;font-size:.82rem;font-weight:800;color:var(--acid);transition:all .25s}
+.live-btn:hover{background:var(--acid);color:#05060a;transform:translateY(-2px)}
+.live-chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.85);opacity:0;transition:all .3s;display:flex;align-items:center;gap:.4rem;background:rgba(5,6,10,.85);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:.72rem;font-weight:800;padding:.5rem .9rem;border-radius:99px;pointer-events:none;z-index:5}
+.live-chip svg{color:var(--acid)}
+@media (hover:hover) and (pointer:fine){.group:hover .live-chip{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.soc-btn{display:grid;place-items:center;width:2.85rem;height:2.85rem;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#cfd3db;transition:all .25s}
+.soc-btn:hover{background:var(--acid);border-color:var(--acid);color:#05060a;transform:translateY(-4px)}
+.chip-f{position:absolute;display:inline-flex;align-items:center;gap:.45rem;background:rgba(16,19,28,.88);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:.5rem .85rem;font-size:.72rem;font-weight:800;color:#fff;z-index:6}
+.nav-link{position:relative;padding:.35rem .1rem;font-size:.9rem;font-weight:600;color:#9ca1ad;transition:color .25s}
+.nav-link:hover{color:#fff}
+.nav-link.active{color:var(--acid)}
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;border-radius:99px;background:var(--acid);transform:scaleX(0);transition:transform .25s}
+.nav-link.active::after{transform:scaleX(1)}
+.ov-l{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.3,1)}
+.ov.open .ov-l{opacity:1;transform:none}
+.ov.open .ov-l:nth-child(1){transition-delay:.05s}.ov.open .ov-l:nth-child(2){transition-delay:.1s}
+.ov.open .ov-l:nth-child(3){transition-delay:.15s}.ov.open .ov-l:nth-child(4){transition-delay:.2s}
+.ov.open .ov-l:nth-child(5){transition-delay:.25s}.ov.open .ov-l:nth-child(6){transition-delay:.3s}
+.burger span{display:block;width:18px;height:2px;background:#fff;border-radius:99px;transition:transform .3s,opacity .3s}
+.burger span+span{margin-top:5px}
+body.lock .burger span:first-child{transform:translateY(3.5px) rotate(45deg)}
+body.lock .burger span:nth-child(2){opacity:0}
+body.lock .burger span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+html[lang="ar"] .burger span:last-child{margin-top:0}
+.role-word{display:inline-block;transition:opacity .24s ease,transform .24s ease}
+.role-word.roll{opacity:0;transform:translateY(10px)}
+.stat-b{padding-inline-start:1.1rem;border-inline-start:1px solid var(--line)}
+.stat-b:first-child{padding-inline-start:0;border-inline-start:0}
+#prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:130;background:linear-gradient(90deg,var(--grape),var(--acid));transform:scaleX(0);transform-origin:left}
+html[dir="rtl"] #prog{transform-origin:right}
+.tilt{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.7,.3,1)!important}
+#toast{position:fixed;bottom:6.8rem;left:50%;margin-left:-160px;width:320px;max-width:86vw;z-index:145;display:flex;align-items:center;justify-content:center;gap:.55rem;text-align:center;background:#161927;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.8rem 1.3rem;font-size:.84rem;font-weight:600;color:#fff;opacity:0;pointer-events:none;transform:translateY(18px);transition:all .35s cubic-bezier(.2,.8,.3,1)}
+#toast.show{opacity:1;transform:translateY(0)}
+#toast svg{color:var(--acid);flex:none}
+/* ================= PHOTO ================= */
+.photo-frame{border-radius:2.2rem;overflow:hidden;background:linear-gradient(135deg,rgba(201,242,79,.5),rgba(139,92,246,.5));padding:3px;box-shadow:0 24px 70px -22px rgba(201,242,79,.28)}
+.photo-in{position:relative;border-radius:2.05rem;overflow:hidden;background:var(--card)}
+.photo-ph{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(120% 120% at 50% 0%,#151a26,var(--card))}
+.img-fail{display:none}
+/* ================= PROJECT MOCKUP (pure CSS art) ================= */
+.chrome{display:flex;align-items:center;gap:.4rem;height:2.4rem;padding-inline:1rem;background:rgba(255,255,255,.035);border-bottom:1px solid rgba(255,255,255,.06)}
+.chrome .cd{width:9px;height:9px;border-radius:99px;background:rgba(255,255,255,.14);flex:none}
+.chrome .cd:first-child{background:rgba(201,242,79,.4)}
+.aw-url{flex:1;max-width:56%;margin-inline:auto;height:60%;background:rgba(255,255,255,.05);border-radius:99px;display:flex;align-items:center;justify-content:center;overflow:hidden;direction:ltr}
+.aw-url b{font-size:.56rem;font-weight:600;color:#6b7280;white-space:nowrap}
+.screen{position:relative;overflow:hidden}
+.screen-page{position:absolute;left:0;right:0;top:0;height:200%;transition:transform 1s cubic-bezier(.19,1,.22,1)}
+@media (hover:hover) and (pointer:fine){.group:hover .screen-page{transform:translateY(-50%)}}
+.art{height:50%;display:flex;flex-direction:column;gap:3.5%;padding:5.5% 7%;
+  background:radial-gradient(110% 70% at 85% -10%,var(--pag,transparent),transparent 60%),
+             linear-gradient(180deg,rgba(255,255,255,.02),transparent 35%),#090b11}
+.aw-nav{height:7%;display:flex;align-items:center;gap:2.4%}
+.aw-logo{width:7%;height:74%;border-radius:99px;background:var(--pa)}
+.aw-links{margin-inline-start:auto;display:flex;gap:2.4%;width:30%;height:56%}
+.aw-links i{flex:1;height:100%;background:rgba(255,255,255,.13);border-radius:99px}
+.aw-pill{width:13%;height:70%;border-radius:99px;border:1px solid var(--pa);background:var(--pas)}
+.aw-body{flex:1;display:flex;gap:5.5%;align-items:center;min-height:0}
+.aw-copy{flex:1.15;display:flex;flex-direction:column;gap:7%;height:64%}
+.aw-chip{width:28%;height:13%;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.aw-h1{height:21%;width:92%;border-radius:99px;background:linear-gradient(90deg,rgba(255,255,255,.92),rgba(255,255,255,.42))}
+.aw-h1.s{width:60%;background:var(--pa)}
+.aw-p{height:9%;width:86%;border-radius:99px;background:rgba(255,255,255,.09)}
+.aw-p2{height:9%;width:62%;border-radius:99px;background:rgba(255,255,255,.09)}
+.aw-ctas{display:flex;gap:6%;height:17%;width:72%;margin-top:1%}
+.aw-btn{width:40%;height:100%;border-radius:99px;background:var(--pa)}
+.aw-btn.g{width:31%;background:transparent;border:1px solid rgba(255,255,255,.22)}
+.aw-visual{flex:.9;height:80%;border-radius:12px;border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(145deg,var(--pag),transparent 55%),linear-gradient(220deg,rgba(255,255,255,.07),transparent)}
+.aw-cards{display:flex;gap:3%;height:19%}
+.aw-cards i{position:relative;flex:1;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
+.aw-cards i::before{content:"";position:absolute;top:14%;inset-inline-start:9%;width:38%;height:24%;border-radius:99px;background:var(--pas)}
+.art.alt{padding-top:6%}
+.aw-sec{height:8%;width:46%;border-radius:99px;background:rgba(255,255,255,.16)}
+.aw-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3.5%;min-height:0}
+.aw-grid i{border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}
+.aw-cta{height:17%;border-radius:12px;background:linear-gradient(90deg,var(--pa),var(--pag));display:flex;align-items:center;gap:3%;padding-inline:6%}
+.aw-cta i{height:24%;border-radius:99px;background:rgba(255,255,255,.85)}
+.aw-cta i.a{width:24%}.aw-cta i.b{width:36%;background:rgba(255,255,255,.35)}
+.aw-cta .go{margin-inline-start:auto;width:14%;height:44%;border-radius:99px;background:rgba(255,255,255,.95)}
+</style>
+</head>
+
+<body class="noise bg-ink font-grot">
+<a href="#main" data-i18n="a11y_skip" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-[150] focus:rounded-full focus:bg-acid focus:px-5 focus:py-2 focus:text-sm focus:font-bold focus:text-ink">تخطَّ إلى المحتوى</a>
+<div id="prog" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="fixed inset-x-0 top-0 z-[80] transition-all duration-300">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-[4.5rem] sm:px-8" aria-label="Main">
+    <a href="#home" class="group flex items-center gap-2.5">
+      <span class="sr-only">Hussein Obeid</span>
+      <span class="grid size-9 place-items-center rounded-xl border border-acid/25 bg-acid/10 font-grot text-sm font-black text-acid transition-transform duration-300 group-hover:-rotate-6" aria-hidden="true">H.</span>
+      <span class="hidden font-grot text-[15px] font-bold tracking-tight text-white sm:block">Hussein<span class="text-acid">.Obeid</span></span>
+    </a>
+    <ul class="hidden items-center gap-7 md:flex">
+      <li><a href="#home" class="nav-link" data-i18n="nav_home" data-nav-link="home">الرئيسية</a></li>
+      <li><a href="#services" class="nav-link" data-i18n="nav_services" data-nav-link="services">خدماتي</a></li>
+      <li><a href="#work" class="nav-link" data-i18n="nav_work" data-nav-link="work">أعمالي</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="nav_contact" data-nav-link="contact">تواصل</a></li>
+    </ul>
+    <div class="flex items-center gap-2.5">
+      <button id="langBtn" type="button" class="rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-zinc-300 transition hover:border-acid/40 hover:text-acid" title="Language / اللغة"><span id="langBtnTxt">EN</span></button>
+      <a href="#contact" class="hidden rounded-full bg-acid px-5 py-2.5 text-sm font-extrabold text-ink transition hover:shadow-[0_10px_30px_-8px_rgba(201,242,79,.6)] md:inline-flex" data-i18n="nav_hire">اطلب صفحة</a>
+      <button id="menuBtn" type="button" class="burger grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 md:hidden" data-i18n-aria="a11y_menu" aria-label="Menu" aria-expanded="false"><div><span></span><span></span><span></span></div></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= MOBILE OVERLAY ================= -->
+<div id="ov" class="ov fixed inset-0 z-[100] flex flex-col bg-ink/97 opacity-0 invisible transition-all duration-300" role="dialog" aria-modal="true">
+  <div class="mx-auto flex w-full max-w-6xl flex-1 flex-col px-8 pb-10 pt-24">
+    <nav class="flex flex-1 flex-col justify-center gap-4" aria-label="Mobile">
+      <a href="#home" class="ov-l flex items-baseline gap-4 py-1 text-3xl font-extrabold text-white" data-nav-link="home"><span class="text-xs font-bold text-acid">01</span><span data-i18n="nav_home">الرئيسية</span></a>
+      <a href="#services" class="ov-l flex items-baseline gap-4 py-1 text-3xl font-extrabold text-white" data-nav-link="services"><span class="text-xs font-bold text-acid">02</span><span data-i18n="nav_services">خدماتي</span></a>
+      <a href="#work" class="ov-l flex items-baseline gap-4 py-1 text-3xl font-extrabold text-white" data-nav-link="work"><span class="text-xs font-bold text-acid">03</span><span data-i18n="nav_work">أعمالي</span></a>
+      <a href="#contact" class="ov-l flex items-baseline gap-4 py-1 text-3xl font-extrabold text-white" data-nav-link="contact"><span class="text-xs font-bold text-acid">04</span><span data-i18n="nav_contact">تواصل</span></a>
+    </nav>
+    <div class="ov-l flex flex-col gap-5">
+      <a data-wa href="https://wa.me/201043309561" class="flex items-center justify-center gap-2 rounded-full bg-acid py-4 text-base font-extrabold text-ink" data-i18n="ov_cta">تحدث معي الآن</a>
+      <div class="soc-row flex items-center justify-center gap-3" data-soc="overlay"></div>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section id="home" class="relative flex min-h-screen items-center overflow-hidden pb-16 pt-28 sm:pt-32">
+  <div class="grid-bg absolute inset-0" aria-hidden="true"></div>
+  <div class="orb orb-a drift absolute -top-24 start-[-8%] size-[46vw] max-w-[520px]" aria-hidden="true"></div>
+  <div class="orb orb-b drift-rev absolute bottom-[-10%] end-[-6%] size-[40vw] max-w-[480px]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.15fr_.85fr]">
+    <div>
+      <div class="stroke-text pointer-events-none absolute -top-10 hidden select-none font-grot text-[15vw] font-black leading-none tracking-tighter lg:block" data-i18n="bg_name" aria-hidden="true">حسين</div>
+
+      <div class="inline-flex items-center gap-2.5 rounded-full border border-acid/25 bg-acid/10 px-4 py-2 text-xs font-bold text-acid" data-reveal>
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-acid opacity-75"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-acid"></span>
+        </span>
+        <span data-i18n="hero_badge">متاح لمشاريع جديدة</span>
+      </div>
+
+      <h1 class="mt-5" data-reveal style="--rd:.08s">
+        <span class="block text-sm font-bold tracking-[.25em] text-zinc-400" data-i18n="hero_greet">مرحباً، أنا</span>
+        <span class="hero-name grad-text mt-2 block bg-clip-text text-transparent text-[clamp(2.7rem,9.5vw,5.2rem)]" data-i18n="hero_name">حسين عبيد</span>
+        <span class="mt-3 block text-[clamp(1.05rem,3.4vw,1.55rem)] font-bold text-zinc-300">
+          <span data-i18n="hero_craft">أصمّم وأبرمج</span>
+          <span class="role-word text-acid" id="roleWord"></span>
+        </span>
+      </h1>
+
+      <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-zinc-400 sm:text-base" data-reveal style="--rd:.16s" data-i18n="hero_tag">أحوّل أفكارك إلى صفحات هبوط عالية التحويل — دقيقة التفاصيل، سريعة كالبرق، ومتألقة على كل الشاشات من الهاتف الصغير حتى 4K.</p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3.5" data-reveal style="--rd:.22s">
+        <a href="#work" class="group inline-flex items-center gap-2.5 rounded-full bg-acid px-7 py-3.5 text-sm font-extrabold text-ink transition hover:shadow-[0_16px_40px_-12px_rgba(201,242,79,.55)] active:scale-95">
+          <span data-i18n="cta_work">شاهد أعمالي</span>
+          <svg class="size-4 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <a data-wa href="https://wa.me/201043309561" class="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-extrabold text-white transition hover:border-[#25d366]/60 hover:text-[#4be07f] active:scale-95">
+          <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2A9.96 9.96 0 0 0 2.1 11.96c0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01A9.96 9.96 0 0 0 22 11.92 9.94 9.94 0 0 0 12.04 2Zm5.83 14.06c-.25.7-1.28 1.3-1.93 1.4-.55.08-1.26.12-2.02-.14-.5-.17-1.14-.4-1.96-.8a17.2 17.2 0 0 1-6.02-5.73c-.44-1.6.29-2.9.74-3.42.45-.5 1.06-.6 1.45-.6h.36c.35 0 .65.15.84.53l1.02 2.4c.11.25.1.55-.06.76l-.5.66c-.17.2-.19.48-.07.7a13.5 13.5 0 0 0 5.2 5.02c.24.13.53.1.72-.08l.76-.77c.24-.25.58-.32.88-.2l2.42 1.1c.38.2.53.5.5.83-.03.13-.08.3-.13.44Z"/></svg>
+          <span data-i18n="cta_wa">تحدث معي على واتساب</span>
+        </a>
+      </div>
+
+      <!-- STATS (TODO: edit the 3 numbers + data-count) -->
+      <div class="mt-10 flex max-w-md" data-reveal style="--rd:.3s">
+        <div class="stat-b flex-1">
+          <div class="flex items-baseline" dir="ltr"><span class="stat-n text-3xl font-extrabold text-white sm:text-4xl" data-count="24">0</span><span class="ms-0.5 text-2xl font-extrabold text-acid">+</span></div>
+          <p class="mt-1 text-[11px] font-semibold tracking-wide text-zinc-400 sm:text-xs" data-i18n="stat_p">مشروع منجز</p>
+        </div>
+        <div class="stat-b flex-1">
+          <div class="flex items-baseline" dir="ltr"><span class="stat-n text-3xl font-extrabold text-white sm:text-4xl" data-count="18">0</span><span class="ms-0.5 text-2xl font-extrabold text-acid">+</span></div>
+          <p class="mt-1 text-[11px] font-semibold tracking-wide text-zinc-400 sm:text-xs" data-i18n="stat_c">عميل سعيد</p>
+        </div>
+        <div class="stat-b flex-1">
+          <div class="flex items-baseline" dir="ltr"><span class="stat-n text-3xl font-extrabold text-white sm:text-4xl" data-count="3">0</span><span class="ms-0.5 text-2xl font-extrabold text-acid">+</span></div>
+          <p class="mt-1 text-[11px] font-semibold tracking-wide text-zinc-400 sm:text-xs" data-i18n="stat_y">سنوات خبرة</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PHOTO ============ -->
+    <div class="tilt relative mx-auto w-60 sm:w-72 lg:w-full lg:max-w-[380px]" data-reveal style="--rd:.2s">
+      <div class="orb absolute -inset-8 opacity-80" style="background:radial-gradient(circle,rgba(201,242,79,.22),transparent 65%)" aria-hidden="true"></div>
+      <svg class="spin-slow absolute -inset-9 hidden text-zinc-500 sm:block" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="cir" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"></path></defs>
+        <text font-size="8.2" font-weight="700" letter-spacing="2.4" fill="currentColor" font-family="Space Grotesk,sans-serif"><textPath href="#cir">FRONT-END DEV • LANDING PAGES • UI •</textPath></text>
+      </svg>
+
+      <div class="photo-frame relative">
+        <div class="photo-in aspect-[4/5]">
+          <!-- fallback until hussein.webp exists -->
+          <div class="photo-ph">
+            <div class="text-center">
+              <div class="mx-auto grid size-20 place-items-center rounded-3xl border border-acid/25 bg-acid/10">
+                <svg class="size-9 text-acid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 16 2.5 12.5a2.3 2.3 0 0 1 2.2-3.2h14.6a2.3 2.3 0 0 1 2.2 3.2L20 16"/><circle cx="7.4" cy="18.6" r="1.6"/><circle cx="16.6" cy="18.6" r="1.6"/><path d="M4 8.6 4.9 6a2 2 0 0 1 1.9-1.3h10.4a2 2 0 0 1 1.9 1.3l.9 2.6"/></svg>
+              </div>
+              <div class="mt-4 font-grot text-3xl font-black text-white">H.O</div>
+              <p class="ph-hint mt-1.5 text-[10px] font-bold tracking-[.35em] text-zinc-400" data-i18n="photo_hint">أضف صورتك هنا</p>
+            </div>
+          </div>
+          <!-- ⬇ PUT YOUR REAL PHOTO NEXT TO index.html AS: hussein.webp -->
+          <img id="myPhoto" src="hussein.webp" alt="" data-i18n-alt="photo_alt" width="480" height="600" fetchpriority="high" decoding="async" class="relative block aspect-[4/5] w-full object-cover object-top" onerror="this.classList.add('img-fail')">
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/70 to-transparent" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="chip-f float -top-3 start-[-12%] sm:-start-8" aria-hidden="true"><span class="font-grot font-black text-acid">&lt;/&gt;</span> Vanilla JS</div>
+      <div class="chip-f float-d -bottom-4 end-[-8%] sm:-end-7" aria-hidden="true">
+        <svg class="size-3.5 text-acid" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg> Pixel Perfect
+      </div>
+    </div>
+  </div>
+
+  <div class="pointer-events-none absolute bottom-5 left-1/2 hidden -translate-x-1/2 md:flex" aria-hidden="true">
+    <span class="grid h-10 w-6 place-items-start justify-center overflow-hidden rounded-full border border-white/15 p-1.5"><span class="scroll-dot"></span></span>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee select-none" aria-hidden="true">
+  <div class="marq-track">
+    <span class="marq-in" id="m1"></span>
+    <span class="marq-in" id="m2"></span>
+  </div>
+</div>
+<!-- ============ SERVICES ============ -->
+<section id="services" class="relative py-20 sm:py-28">
+  <div class="orb orb-b absolute end-[-10%] top-10 size-[32vw] max-w-[420px]" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="mb-10 flex items-end justify-between gap-8 sm:mb-14" data-reveal>
+      <div>
+        <p class="sec-eyebrow" data-i18n="sv_e">✦ ماذا أقدم</p>
+        <h2 class="sec-title text-[clamp(1.9rem,5.2vw,3.1rem)]" data-i18n="sv_t">خدماتي</h2>
+      </div>
+      <p class="hidden max-w-xs pb-1 text-sm leading-relaxed text-zinc-400 md:block" data-i18n="sv_s">كل ما تحتاجه صفحتك لتظهر باحتراف وتحوّل زوّارك إلى عملاء.</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:col-span-2 sm:p-8" data-reveal style="--rd:.05s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">01</span>
+        <div class="relative">
+          <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv1_t">صفحات هبوط تصنع الفرق</h3>
+          <p class="mt-2.5 max-w-md text-sm leading-relaxed text-zinc-400" data-i18n="sv1_d">صفحة واحدة مركّزة بهدف واضح: تحويل زوّارك إلى عملاء. أشتغل معك من الفكرة الأولى حتى نشر الرابط الفعلي.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-zinc-400" data-i18n="sv1_c1">سرعة فائقة</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-zinc-400" data-i18n="sv1_c2">دقة البيكسل</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-zinc-400" data-i18n="sv1_c3">تحويل أعلى</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-zinc-400" data-i18n="sv1_c4">تسليم سريع</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:p-8" data-reveal style="--rd:.1s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">02</span>
+        <div class="relative">
+          <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></div>
+          <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv2_t">تحويل التصميم إلى كود</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-400" data-i18n="sv2_d">ملفات Figma تتحوّل إلى HTML/CSS/JS نظيف مطابق للبيكسل، بتفاصيل لا تُغتفر.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:p-8" data-reveal style="--rd:.05s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">03</span>
+        <div class="relative">
+          <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv3_t">سرعة صاروخية</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-400" data-i18n="sv3_d">90+ في Lighthouse وتحميل خلال ثوانٍ — لأن كل نصف ثانية تأخير يكلّفك زائراً.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:p-8" data-reveal style="--rd:.1s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">04</span>
+        <div class="relative">
+          <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="12.5" height="12" rx="2"/><path d="M6 20h7"/><rect x="17.5" y="8" width="4.8" height="12" rx="1.6"/></svg></div>
+          <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv4_t">متجاوبة مع كل الشاشات</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-400" data-i18n="sv4_d">من شاشة Galaxy S5 القديمة حتى 4K — تجربة مثالية على كل متصفح.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:p-8" data-reveal style="--rd:.15s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">05</span>
+        <div class="relative">
+          <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg></div>
+          <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv5_t">حركات وتفاعل سلس</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-400" data-i18n="sv5_d">تفاصيل متحركة تمنح إحساساً فاخراً دون أن تلمس ظلّ تأثير على السرعة أو البطارية.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30 sm:col-span-2 sm:p-8" data-reveal style="--rd:.05s">
+        <div class="card-glow" aria-hidden="true"></div>
+        <span class="stroke-text pointer-events-none absolute end-6 top-4 select-none font-grot text-6xl font-black" aria-hidden="true">06</span>
+        <div class="relative flex gap-6 max-lg:flex-col">
+          <div class="max-w-md">
+            <div class="icon-tile"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="3"/><path d="M8 6.5h8M8 10.5h8M8 14.5h4"/></svg></div>
+            <h3 class="mt-5 text-xl font-extrabold text-white" data-i18n="sv6_t">كود نظيف وجاهز للسيو</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-zinc-400" data-i18n="sv6_d">بنية HTML دلالية تحبّها محركات البحث، منظّمة وقابلة للتطوير لاحقاً دون فوضى.</p>
+          </div>
+          <div class="grid flex-1 grid-cols-2 gap-3 self-center">
+            <div class="rounded-2xl border border-white/[.07] bg-white/[.03] p-4">
+              <p class="font-grot text-2xl font-black text-acid" dir="ltr">100%</p>
+              <p class="mt-1 text-[11px] font-semibold text-zinc-400" data-i18n="sv6_m1">HTML دلالي</p>
+            </div>
+            <div class="rounded-2xl border border-white/[.07] bg-white/[.03] p-4">
+              <p class="font-grot text-2xl font-black text-acid" dir="ltr">A+</p>
+              <p class="mt-1 text-[11px] font-semibold text-zinc-400" data-i18n="sv6_m2">جاهز للسيو</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK (test landing pages — JS renders cards) ============ -->
+<section id="work" class="relative py-20 sm:py-28">
+  <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-6 sm:mb-14" data-reveal>
+      <div>
+        <p class="sec-eyebrow" data-i18n="wr_e">✦ أعمال مختارة</p>
+        <h2 class="sec-title text-[clamp(1.9rem,5.2vw,3.1rem)]" data-i18n="wr_t">صفحات هبوط أنجزتها</h2>
+      </div>
+      <span class="inline-flex items-center gap-2 rounded-full border border-acid/25 bg-acid/10 px-4 py-2 text-[11px] font-bold text-acid" data-i18n="wr_note">نماذج تجريبية — اضغط للعرض المباشر</span>
+    </div>
+    <div id="grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"><!-- cards injected by JS --></div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="relative py-20 sm:py-28">
+  <div class="orb orb-a absolute start-[-10%] top-20 size-[30vw] max-w-[400px]" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="mb-10 sm:mb-14" data-reveal>
+      <p class="sec-eyebrow" data-i18n="pr_e">✦ كيف أعمل</p>
+      <h2 class="sec-title text-[clamp(1.9rem,5.2vw,3.1rem)]" data-i18n="pr_t">من الفكرة إلى الإطلاق</h2>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30" data-reveal>
+        <span class="font-grot text-4xl font-black text-acid" dir="ltr">01</span>
+        <h3 class="mt-3 text-base font-extrabold text-white" data-i18n="pr1_t">استكشاف</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="pr1_d">مكالمة قصيرة: أفهم هدفك وجمهورك وما تريد تحقيقه بالضبط.</p>
+      </div>
+      <div class="rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30" data-reveal style="--rd:.08s">
+        <span class="font-grot text-4xl font-black text-acid" dir="ltr">02</span>
+        <h3 class="mt-3 text-base font-extrabold text-white" data-i18n="pr2_t">تصميم</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="pr2_d">هيكل عصري أنيق يعرض عرضك بوضوح ويبهر من أول نظرة.</p>
+      </div>
+      <div class="rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30" data-reveal style="--rd:.16s">
+        <span class="font-grot text-4xl font-black text-acid" dir="ltr">03</span>
+        <h3 class="mt-3 text-base font-extrabold text-white" data-i18n="pr3_t">تطوير</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="pr3_d">برمجة نظيفة وسريعة ومتجاوبة بالكامل — وترى نسخة تجريبية مبكراً.</p>
+      </div>
+      <div class="rounded-3xl border border-white/[.07] bg-card p-6 transition-colors duration-300 hover:border-acid/30" data-reveal style="--rd:.24s">
+        <span class="font-grot text-4xl font-black text-acid" dir="ltr">04</span>
+        <h3 class="mt-3 text-base font-extrabold text-white" data-i18n="pr4_t">إطلاق</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="pr4_d">ربط النطاق + تحليلات + لمسة نهائية… ثم النشر الفعلي.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="relative pb-24 pt-4 sm:pb-32">
+  <div class="relative mx-auto max-w-6xl px-5 sm:px-8" data-reveal>
+    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-acid/45 via-grape/25 to-transparent p-[1.5px]">
+      <div class="relative overflow-hidden rounded-[calc(2rem-1.5px)] bg-panel px-6 py-14 text-center sm:px-12 sm:py-20">
+        <div class="orb orb-a absolute -top-24 start-[-10%] size-[380px]" aria-hidden="true"></div>
+        <div class="orb orb-b absolute -bottom-32 end-[-8%] size-[420px]" aria-hidden="true"></div>
+        <div class="relative">
+          <p class="sec-eyebrow" data-i18n="ct_e">✦ تواصل معي</p>
+          <h2 class="sec-title mx-auto max-w-2xl text-[clamp(2rem,6vw,3.3rem)]" data-i18n="ct_t">جاهز لإطلاق صفحتك القادمة؟</h2>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-zinc-400" data-i18n="ct_s">أخبرني بفكرتك على واتساب — أرد عادة خلال ساعات، ونبدأ بالمسودة الأولى مجاناً.</p>
+          <div class="mt-9 flex flex-wrap items-center justify-center gap-3.5">
+            <a data-wa href="https://wa.me/201043309561" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 rounded-full bg-[#25d366] px-8 py-4 text-base font-extrabold text-white transition hover:shadow-[0_18px_45px_-12px_rgba(37,211,102,.65)] active:scale-95">
+              <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2A9.96 9.96 0 0 0 2.1 11.96c0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01A9.96 9.96 0 0 0 22 11.92 9.94 9.94 0 0 0 12.04 2Zm5.83 14.06c-.25.7-1.28 1.3-1.93 1.4-.55.08-1.26.12-2.02-.14-.5-.17-1.14-.4-1.96-.8a17.2 17.2 0 0 1-6.02-5.73c-.44-1.6.29-2.9.74-3.42.45-.5 1.06-.6 1.45-.6h.36c.35 0 .65.15.84.53l1.02 2.4c.11.25.1.55-.06.76l-.5.66c-.17.2-.19.48-.07.7a13.5 13.5 0 0 0 5.2 5.02c.24.13.53.1.72-.08l.76-.77c.24-.25.58-.32.88-.2l2.42 1.1c.38.2.53.5.5.83-.03.13-.08.3-.13.44Z"/></svg>
+              <span data-i18n="ct_wa">راسلني على واتساب</span>
+            </a>
+            <a id="mailBtn" href="mailto:devbyhussein@gmail.com" class="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-base font-extrabold text-white transition hover:border-acid/50 hover:text-acid active:scale-95">
+              <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+              <span data-i18n="ct_mail">أو بالبريد الإلكتروني</span>
+            </a>
+          </div>
+          <div class="mt-12">
+            <p class="text-xs font-bold uppercase tracking-[.25em] text-zinc-400" data-i18n="ct_follow">تابعني على</p>
+            <div class="soc-row mt-5 flex flex-wrap items-center justify-center gap-3" data-soc="contact"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+(function(){
+'use strict';
+
+/* ==================================================================
+   ⚙️ CONFIG — عدّل هذا القسم فقط قبل النشر / edit THIS section only
+   ================================================================== */
+const CONFIG = {
+  /* TODO 1) رقمك بصيغة دولية بدون + أو أصفار:
+     (your country code + number, digits only) */
+  whatsappNumber: "201043309561",
+
+  /* TODO 2) بريدك */
+  email: "devbyhussein@gmail.com",
+
+  /* TODO 3) روابط حساباتك */
+  social: {
+    facebook:  "https://facebook.com/devbyhussein.eg",
+    x:         "https://x.com/devbyhussein",
+    instagram: "https://instagram.com/devbyhussein",
+    linkedin:  "https://www.linkedin.com/in/devbyhussein",
+    github:    "https://github.com/devbyhussein"
+  },
+
+  /* TODO 4) صفحات الهبوط التجريبية — ضع رابط كل صفحة في url:
+     url: "https://example.com/my-page"  (استخدم "#" لو لم تُرفع بعد) */
+  projects: [
+    { url:"#", accent:"#8b5cf6", domain:"aurora.sa",
+      en:{t:"Aurora — SaaS Startup",  tag:"SaaS • Startup"},
+      ar:{t:"Aurora — شركة تقنية",    tag:"SaaS • ستارتب"} },
+    { url:"#", accent:"#f59e0b", domain:"bloomcafe.com",
+      en:{t:"Bloom — Café & Bistro",  tag:"Café • Restaurant"},
+      ar:{t:"Bloom — مقهى ومطعم",     tag:"مقهى • مطعم"} },
+    { url:"#", accent:"#34d399", domain:"estatepro.net",
+      en:{t:"Estate Pro — Real Estate", tag:"Real Estate"},
+      ar:{t:"Estate Pro — عقارات",       tag:"عقارات"} },
+    { url:"#", accent:"#f43f5e", domain:"fitzone.club",
+      en:{t:"FitZone — Gym & Fitness", tag:"Gym • Fitness"},
+      ar:{t:"FitZone — نادٍ رياضي",     tag:"جيم • رياضة"} },
+    { url:"#", accent:"#38bdf8", domain:"voyager.travel",
+      en:{t:"Voyager — Travel Agency", tag:"Travel • Tours"},
+      ar:{t:"Voyager — وكالة سفر",      tag:"سفر • رحلات"} },
+    { url:"#", accent:"#eab308", domain:"shopnova.store",
+      en:{t:"ShopNova — Online Store", tag:"E-commerce"},
+      ar:{t:"ShopNova — متجر إلكتروني", tag:"تجارة إلكترونية"} }
+  ]
+};
+
+/* ============ I18N ============ */
+const I18N = {
+en:{
+  meta:{title:"Hussein Obeid — Front-End & Landing Page Developer",
+        desc:"Hussein Obeid — front-end developer crafting high-converting, pixel-perfect, blazing-fast landing pages that look flawless on every screen.",
+        ogT:"Hussein Obeid — Front-End & Landing Page Developer",
+        ogD:"High-converting, pixel-perfect, ultra fast landing pages — flawless on every screen."},
+  roles:["landing pages that convert.","fast websites.","smooth interactions.","flawless experiences."],
+  marq:["LANDING PAGES","PIXEL PERFECT","ULTRA FAST","RESPONSIVE","CLEAN CODE","MOTION DESIGN","SEO READY"],
+  wa_msg:"Hi Hussein! I have a landing page project and I'd love to start 👋",
+  nav_home:"Home",nav_services:"Services",nav_work:"Work",nav_contact:"Contact",nav_hire:"Start a project",
+  ov_cta:"Message me now",
+  a11y_skip:"Skip to content",a11y_lang:"Switch language",a11y_menu:"Menu",a11y_wa:"Chat on WhatsApp",a11y_top:"Back to top",
+  bg_name:"HUSSEIN",hero_badge:"Available for new projects",hero_greet:"Hi, I'm",hero_name:"Hussein Obeid",hero_craft:"I craft",
+  hero_tag:"I turn ideas into high-converting landing pages — pixel-perfect, blazing fast, and flawless on every screen, from small phones to 4K.",
+  cta_work:"View My Work",cta_wa:"Chat on WhatsApp",
+  stat_p:"Projects delivered",stat_c:"Happy clients",stat_y:"Years of experience",
+  photo_alt:"Portrait of Hussein Obeid — front-end developer",photo_hint:"ADD YOUR PHOTO",
+  sv_e:"✦ What I do",sv_t:"My Services",sv_s:"Everything your page needs to look professional and convert visitors into customers.",
+  sv1_t:"Landing Pages That Convert",sv1_d:"One focused page with a clear goal: turning your visitors into customers. I work with you from the first idea to the live link.",
+  sv1_c1:"Ultra fast",sv1_c2:"Pixel perfect",sv1_c3:"Higher conversion",sv1_c4:"Fast delivery",
+  sv2_t:"Design → Code",sv2_d:"Your Figma files become clean HTML/CSS/JS — pixel perfect, with details that never get shaved off.",
+  sv3_t:"Rocket Speed",sv3_d:"90+ Lighthouse scores and loading in seconds — every half-second of delay costs you a visitor.",
+  sv4_t:"Responsive Everywhere",sv4_d:"From an old Galaxy S5 to 4K screens — a perfect experience on any browser.",
+  sv5_t:"Smooth Motion & Interactions",sv5_d:"Animated details that feel premium without touching speed or battery.",
+  sv6_t:"Clean & SEO-Ready Code",sv6_d:"Semantic HTML structure that search engines love — organized, readable, and extendable later without chaos.",
+  sv6_m1:"Semantic HTML",sv6_m2:"SEO ready",
+  wr_e:"✦ Selected Work",wr_t:"Landing Pages I've Built",wr_note:"Test pages — click Live View",
+  work_live:"Live View",toast_link:"Add the real link in CONFIG.projects at the bottom of index.html.",
+  pr_e:"✦ How I work",pr_t:"From Idea to Launch",
+  pr1_t:"Discover",pr1_d:"A short call: I understand your goal, audience, and exactly what you want to achieve.",
+  pr2_t:"Design",pr2_d:"A sleek, modern layout that presents your offer clearly and impresses at first sight.",
+  pr3_t:"Build",pr3_d:"Clean, fast, fully responsive code — and you see a live preview early.",
+  pr4_t:"Launch",pr4_d:"Domain + analytics + final polish… then we go live.",
+  ct_e:"✦ Contact",ct_t:"Ready to launch your next page?",ct_s:"Tell me your idea on WhatsApp — I usually reply within hours, and the first draft is on me.",
+  ct_wa:"Message me on WhatsApp",ct_mail:"Or send an email",ct_follow:"Follow me on",
+  ft_built:"Crafted with care using HTML, Tailwind CSS & vanilla JavaScript ✦",ft_top:"Top"
+},
+ar:{
+  meta:{title:"حسين عبيد | مطوّر واجهات أمامية وصفحات هبوط",
+        desc:"حسين عبيد — مطوّر واجهات أمامية متخصص في صفحات هبوط سريعة التحويل، دقيقة التفاصيل ومتوافقة مع كل الشاشات.",
+        ogT:"حسين عبيد — مطوّر واجهات أمامية",
+        ogD:"صفحات هبوط عالية التحويل — سريعة، دقيقة، ومتجاوبة مع كل الشاشات."},
+  roles:["صفحات هبوط تصنع الفرق.","مواقع سريعة كالبرق.","واجهات دقيقة التفاصيل.","تجارب تحوّل الزوّار عملاء."],
+  marq:["صفحات هبوط","دقة البيكسل","سرعة فائقة","متجاوبة بالكامل","كود نظيف","حركات سلسة","جاهز للسيو"],
+  wa_msg:"مرحباً حسين! عندي فكرة صفحة هبوط وأرغب بالبدء 👋",
+  nav_home:"الرئيسية",nav_services:"خدماتي",nav_work:"أعمالي",nav_contact:"تواصل",nav_hire:"اطلب صفحة",
+  ov_cta:"تحدث معي الآن",
+  a11y_skip:"تخطَّ إلى المحتوى",a11y_lang:"تغيير اللغة",a11y_menu:"القائمة",a11y_wa:"تواصل عبر واتساب",a11y_top:"العودة للأعلى",
+  bg_name:"حسين",hero_badge:"متاح لمشاريع جديدة",hero_greet:"مرحباً، أنا",hero_name:"حسين عبيد",hero_craft:"أصمّم وأبرمج",
+  hero_tag:"أحوّل أفكارك إلى صفحات هبوط عالية التحويل — دقيقة التفاصيل، سريعة كالبرق، ومتألقة على كل الشاشات من الهاتف الصغير حتى 4K.",
+  cta_work:"شاهد أعمالي",cta_wa:"تحدث معي على واتساب",
+  stat_p:"مشروع منجز",stat_c:"عميل سعيد",stat_y:"سنوات خبرة",
+  photo_alt:"صورة شخصية لـ حسين عبيد — مطوّر واجهات أمامية",photo_hint:"أضف صورتك هنا",
+  sv_e:"✦ ماذا أقدم",sv_t:"خدماتي",sv_s:"كل ما تحتاجه صفحتك لتظهر باحتراف وتحوّل زوّارك إلى عملاء.",
+  sv1_t:"صفحات هبوط تصنع الفرق",sv1_d:"صفحة واحدة مركّزة بهدف واضح: تحويل زوّارك إلى عملاء. أشتغل معك من الفكرة الأولى حتى نشر الرابط الفعلي.",
+  sv1_c1:"سرعة فائقة",sv1_c2:"دقة البيكسل",sv1_c3:"تحويل أعلى",sv1_c4:"تسليم سريع",
+  sv2_t:"تحويل التصميم إلى كود",sv2_d:"ملفات Figma تتحوّل إلى HTML/CSS/JS نظيف مطابق للبيكسل، بتفاصيل لا تُغتفر.",
+  sv3_t:"سرعة صاروخية",sv3_d:"90+ في Lighthouse وتحميل خلال ثوانٍ — لأن كل نصف ثانية تأخير يكلّفك زائراً.",
+  sv4_t:"متجاوبة مع كل الشاشات",sv4_d:"من شاشة Galaxy S5 القديمة حتى 4K — تجربة مثالية على كل متصفح.",
+  sv5_t:"حركات وتفاعل سلس",sv5_d:"تفاصيل متحركة تمنح إحساساً فاخراً دون أن تلمس ظلّ تأثير على السرعة أو البطارية.",
+  sv6_t:"كود نظيف وجاهز للسيو",sv6_d:"بنية HTML دلالية تحبّها محركات البحث — منظّمة وقابلة للتطوير لاحقاً دون فوضى.",
+  sv6_m1:"HTML دلالي",sv6_m2:"جاهز للسيو",
+  wr_e:"✦ أعمال مختارة",wr_t:"صفحات هبوط أنجزتها",wr_note:"نماذج تجريبية — اضغط للعرض المباشر",
+  work_live:"عرض مباشر",toast_link:"أضف الرابط الحقيقي في CONFIG.projects أسفل ملف index.html.",
+  pr_e:"✦ كيف أعمل",pr_t:"من الفكرة إلى الإطلاق",
+  pr1_t:"استكشاف",pr1_d:"مكالمة قصيرة: أفهم هدفك وجمهورك وما تريد تحقيقه بالضبط.",
+  pr2_t:"تصميم",pr2_d:"هيكل عصري أنيق يعرض عرضك بوضوح ويبهر من أول نظرة.",
+  pr3_t:"تطوير",pr3_d:"برمجة نظيفة وسريعة ومتجاوبة بالكامل — وترى نسخة تجريبية مبكراً.",
+  pr4_t:"إطلاق",pr4_d:"ربط النطاق + تحليلات + لمسة نهائية… ثم النشر الفعلي.",
+  ct_e:"✦ تواصل معي",ct_t:"جاهز لإطلاق صفحتك القادمة؟",ct_s:"أخبرني بفكرتك على واتساب — أرد عادة خلال ساعات، ونبدأ بالمسودة الأولى مجاناً.",
+  ct_wa:"راسلني على واتساب",ct_mail:"أو بالبريد الإلكتروني",ct_follow:"تابعني على",
+  ft_built:"صُنع بعناية باستخدام HTML و Tailwind CSS و JavaScript نقي ✦",ft_top:"أعلى الصفحة"
+}};
+
+/* ============ helpers ============ */
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+let LANG=document.documentElement.lang||"ar";
+const t=k=>(I18N[LANG]&&I18N[LANG][k])||I18N.en[k]||"";
+const rgb=(hex,a)=>{const n=parseInt(hex.slice(1),16);return "rgba("+((n>>16)&255)+","+((n>>8)&255)+","+(n&255)+","+a+")";};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+/* ============ SOCIALS ============ */
+const SOC={
+  facebook:{label:"Facebook",svg:'<path d="M13.5 21.5v-7.6h2.6l.5-3.1h-3.1V8.8c0-.9.3-1.6 1.7-1.6h1.6V4.4c-.3 0-1.3-.1-2.4-.1-2.4 0-3.9 1.4-3.9 4v2.5H8v3.1h2.5v7.6h3Z"/>'},
+  x:{label:"X (Twitter)",svg:'<path d="M17.2 3.2h3l-6.7 7.7 7.4 10.6h-5.7l-4.5-6.1-5.1 6.1h-3l7.1-8.2L2.5 3.2h5.8l4 5.4 4.9-5.4Zm-1 15.2h1.6L8 5h-1.7l10 13.4Z"/>'},
+  instagram:{label:"Instagram",svg:'<path d="M12 2.9c3 0 3.4 0 4.6.1 1.1 0 1.7.2 2.1.4.5.2.9.5 1.3.9.4.4.7.8.9 1.3.2.4.4 1 .4 2.1.1 1.2.1 1.6.1 4.6s0 3.4-.1 4.6c0 1.1-.2 1.7-.4 2.1a3.6 3.6 0 0 1-.9 1.3c-.4.4-.8.7-1.3.9-.4.2-1 .4-2.1.4-1.2.1-1.6.1-4.6.1s-3.4 0-4.6-.1c-1.1 0-1.7-.2-2.1-.4a3.6 3.6 0 0 1-1.3-.9 3.6 3.6 0 0 1-.9-1.3c-.2-.4-.4-1-.4-2.1-.1-1.2-.1-1.6-.1-4.6s0-3.4.1-4.6c0-1.1.2-1.7.4-2.1.2-.5.5-.9.9-1.3.4-.4.8-.7 1.3-.9.4-.2 1-.4 2.1-.4 1.2-.1 1.6-.1 4.6-.1Zm0 2c-3 0-3.3 0-4.5.1-1 .1-1.4.2-1.8.4-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.2.4-.3.8-.4 1.8 0 1.2-.1 1.5-.1 4.5s0 3.3.1 4.5c.1 1 .2 1.4.4 1.8.2.4.4.7.7 1 .3.3.6.5 1 .7.4.2.8.3 1.8.4 1.2 0 1.5.1 4.5.1s3.3 0 4.5-.1c1-.1 1.4-.2 1.8-.4.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .2-.4.3-.8.4-1.8 0-1.2.1-1.5.1-4.5s0-3.3-.1-4.5c-.1-1-.2-1.4-.4-1.8a2.5 2.5 0 0 0-.7-1 2.5 2.5 0 0 0-1-.7c-.4-.2-.8-.3-1.8-.4-1.2-.1-1.5-.1-4.5-.1Zm0 3.2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm6.2-2.4a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z"/>'},
+  linkedin:{label:"LinkedIn",svg:'<path d="M6.4 20.5H3.2V9.4h3.2v11.1ZM4.8 7.9A1.9 1.9 0 1 1 4.8 4a1.9 1.9 0 0 1 0 3.9ZM21 20.5h-3.2v-6.3c0-1.6-.6-2.6-2-2.6-1.1 0-1.7.7-2 1.5-.1.3-.1.6-.1 1v6.4H8.5s.1-10.2 0-11.1h3.2v1.6c.4-.7 1.2-1.8 3-1.8 2.3 0 3.9 1.5 3.9 4.4v6.9Z"/>'},
+  github:{label:"GitHub",svg:'<path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.4 6.8 9.8.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.4-3.4-1.4-.4-1.2-1.1-1.5-1.1-1.5-.9-.7.1-.6.1-.6 1 .1 1.5 1.1 1.5 1.1.9 1.6 2.3 1.1 2.9.9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.2-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.7.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v3.1c0 .3.2.6.7.5a10.3 10.3 0 0 0 6.8-9.8C22 6.6 17.5 2 12 2Z"/>'}
+};
+const ARROW='<svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+
+function renderSocials(){
+  $$(".soc-row").forEach(row=>{
+    row.innerHTML=Object.keys(CONFIG.social).map(k=>
+      '<a href="'+esc(CONFIG.social[k])+'" target="_blank" rel="noopener" class="soc-btn" aria-label="'+SOC[k].label+'" title="'+SOC[k].label+'">'+
+      '<svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+SOC[k].svg+'</svg></a>').join("");
+  });
+}
+function updateWaLinks(){
+  const href="https://wa.me/"+CONFIG.whatsappNumber+"?text="+encodeURIComponent(t("wa_msg"));
+  $$("[data-wa]").forEach(a=>a.setAttribute("href",href));
+  $("#mailBtn").setAttribute("href","mailto:"+CONFIG.email);
+}
+
+/* ============ PROJECTS (CSS-art mockups) ============ */
+function artHTML(accent,alt){
+  const st='style="--pa:'+accent+';--pas:'+rgb(accent,.28)+';--pag:'+rgb(accent,.34)+'"';
+  return alt
+  ? '<div class="art alt" '+st+'>'+
+      '<div class="aw-sec"></div>'+
+      '<div class="aw-grid"><i></i><i></i><i></i><i></i></div>'+
+      '<div class="aw-cta"><i class="a"></i><i class="b"></i><span class="go"></span></div>'+
+    '</div>'
+  : '<div class="art" '+st+'>'+
+      '<div class="aw-nav"><span class="aw-logo"></span><span class="aw-links"><i></i><i></i><i></i></span><span class="aw-pill"></span></div>'+
+      '<div class="aw-body"><div class="aw-copy"><span class="aw-chip"></span><span class="aw-h1"></span><span class="aw-h1 s"></span><span class="aw-p"></span><span class="aw-ctas"><span class="aw-btn"></span><span class="aw-btn g"></span></span></div><span class="aw-visual"></span></div>'+
+      '<div class="aw-cards"><i></i><i></i><i></i></div>'+
+    '</div>';
+}
+function renderProjects(){
+  const grid=$("#grid"); if(!grid) return;
+  grid.innerHTML=CONFIG.projects.map((p,i)=>{
+    const L=I18N[LANG], loc=p[L&&LANG==="ar"?"ar":"en"];
+    const link=p.url&&p.url!=="#"?p.url:"#";
+    return '<article class="tilt group relative flex flex-col overflow-hidden rounded-3xl border border-white/[.07] bg-card transition-colors duration-300 hover:border-acid/30" data-reveal style="--rd:'+((i%3)*0.07)+'s">'+
+      '<div class="relative border-b border-white/[.06]">'+
+        '<div class="chrome"><span class="cd"></span><span class="cd"></span><span class="cd"></span><span class="aw-url"><b>https://'+esc(p.domain||"")+'</b></span></div>'+
+        '<div class="screen aspect-[4/3]">'+
+          '<div class="screen-page">'+artHTML(p.accent,false)+artHTML(p.accent,true)+'</div>'+
+          '<span class="live-chip">'+ARROW+'Live</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="flex items-center justify-between gap-3 p-5 pt-4 sm:p-6 sm:pt-4">'+
+        '<div class="min-w-0">'+
+          '<h3 class="truncate text-base font-extrabold text-white sm:text-lg">'+esc(loc.t)+'</h3>'+
+          '<p class="mt-1 truncate font-grot text-[11px] font-bold uppercase tracking-[.18em] text-zinc-400">'+esc(loc.tag)+'</p>'+
+        '</div>'+
+        '<a href="'+link+'" target="_blank" rel="noopener" data-live="'+i+'" class="live-btn shrink-0" '+(link==="#"?'data-todo="1"':'')+'>'+
+          '<span>'+t("work_live")+'</span>'+ARROW+'</a>'+
+      '</div>'+
+    '</article>';
+  }).join("");
+  collectReveals();
+  $$("#grid .tilt").forEach(bindTilt);
+}
+
+/* ============ MARQUEE ============ */
+function renderMarquee(){
+  const html=I18N[LANG].marq.map(x=>'<b>'+esc(x)+'</b><i class="star"></i>').join("");
+  const m1=$("#m1"),m2=$("#m2"); if(!m1) return;
+  m1.innerHTML=html; m2.innerHTML=html;
+}
+
+/* ============ LANGUAGE ============ */
+/* ============ lazy font for the OTHER language (perf) ============ */
+function ensureFont(l){
+  if(document.getElementById("font-"+l)) return;
+  var link=document.createElement("link");
+  link.id="font-"+l; link.rel="stylesheet";
+  link.href="https://fonts.googleapis.com/css2?family="+(l==="ar"?"Cairo:wght@200..1000":"Space+Grotesk:wght@300..700")+"&display=swap";
+  document.head.appendChild(link);
+}
+function setLangLabel(){ $("#langBtnTxt").textContent = LANG==="ar" ? "EN" : "عربي"; }
+function applyLang(l){
+  LANG=l;
+  ensureFont(l);
+  document.documentElement.lang=l;
+  document.documentElement.dir=(l==="ar"?"rtl":"ltr");
+  try{localStorage.setItem("ho:lang",l);}catch(e){}
+  const D=I18N[l];
+  $$("[data-i18n]").forEach(el=>{ el.textContent=t(el.dataset.i18n); });
+  $$("[data-i18n-aria]").forEach(el=>el.setAttribute("aria-label",t(el.dataset.i18nAria)));
+  $$("[data-i18n-alt]").forEach(el=>el.setAttribute("alt",t(el.dataset.i18nAlt)));
+  document.title=D.meta.title;
+  const d=$("#metaDesc"); if(d) d.setAttribute("content",D.meta.desc);
+  const og=$("#ogTitle"); if(og) og.setAttribute("content",D.meta.ogT);
+  const ogd=$("#ogDesc"); if(ogd) ogd.setAttribute("content",D.meta.ogD);
+  setLangLabel(); updateWaLinks(); renderSocials(); renderProjects(); renderMarquee();
+  startRoles(); requestAnimationFrame(collectReveals);
+}
+/* ============ reveal ============ */
+const revealIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in-view"); revealIO.unobserve(e.target);} });
+},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+function collectReveals(){ $$("[data-reveal]").forEach(el=>revealIO.observe(el)); }
+
+/* ============ counters ============ */
+const countIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    countIO.unobserve(e.target);
+    const el=e.target, end=+el.dataset.count||0, t0=performance.now(), dur=1400;
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1), v=Math.round(end*(1-Math.pow(1-p,3)));
+      el.textContent=v;
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+  });
+},{threshold:.6});
+$$(".stat-n").forEach(el=>countIO.observe(el));
+
+/* ============ roles rotator ============ */
+let roleList=[], roleIdx=0, roleTimer=null;
+function startRoles(){
+  const el=$("#roleWord"); if(!el) return;
+  roleList=(I18N[LANG]&&I18N[LANG].roles)||[];
+  roleIdx=0;
+  if(roleTimer) clearInterval(roleTimer);
+  el.textContent=roleList[0]||"";
+  roleTimer=setInterval(()=>{
+    const el2=$("#roleWord");
+    el2.classList.add("roll");
+    setTimeout(()=>{ roleIdx=(roleIdx+1)%roleList.length; el2.textContent=roleList[roleIdx]; el2.classList.remove("roll"); },250);
+  },2600);
+}
+
+/* ============ nav / scroll ============ */
+const nav=$("#nav"), prog=$("#prog"), topBtn=$("#topBtn");
+let ticking=false;
+function onScroll(){
+  if(ticking) return; ticking=true;
+  requestAnimationFrame(()=>{
+    const y=scrollY, dh=document.documentElement.scrollHeight-innerHeight;
+    prog.style.transform="scaleX("+(dh>0?Math.min(y/dh,1):0)+")";
+    nav.classList.toggle("nav-solid",y>26);
+    const show=y>620;
+    topBtn.classList.toggle("pointer-events-none",!show);
+    topBtn.style.opacity=show?"1":"0";
+    ticking=false;
+  });
+}
+addEventListener("scroll",onScroll,{passive:true}); onScroll();
+topBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+
+/* active section in nav */
+const spy=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    $$("[data-nav-link]").forEach(a=>a.classList.toggle("active",a.dataset.navLink===e.target.id));
+  });
+},{rootMargin:"-42% 0px -52% 0px"});
+["home","services","work","process","contact"].forEach(id=>{ const s=document.getElementById(id); if(s) spy.observe(s); });
+
+/* ============ mobile menu ============ */
+const ov=$("#ov"), menuBtn=$("#menuBtn");
+function setMenu(open){
+  ov.classList.toggle("open",open);
+  ov.classList.toggle("opacity-0",!open);
+  ov.classList.toggle("invisible",!open);
+  document.body.classList.toggle("lock",open);
+  document.body.style.overflow=open?"hidden":"";
+  menuBtn.setAttribute("aria-expanded",open);
+}
+menuBtn.addEventListener("click",()=>setMenu(!ov.classList.contains("open")));
+$$("[data-nav-link]").forEach(a=>a.addEventListener("click",()=>{ if(ov.classList.contains("open")) setMenu(false); }));
+addEventListener("keydown",e=>{ if(e.key==="Escape"&&ov.classList.contains("open")) setMenu(false); });
+
+/* ============ toast + project link guard ============ */
+const toast=$("#toast"), toastTxt=$("#toastTxt"); let toastT=null;
+function showToast(msg){
+  toastTxt.textContent=msg;
+  toast.classList.add("show");
+  if(toastT) clearTimeout(toastT);
+  toastT=setTimeout(()=>toast.classList.remove("show"),3600);
+}
+$("#grid").addEventListener("click",e=>{
+  const a=e.target.closest("[data-live]"); if(!a) return;
+  const p=CONFIG.projects[+a.dataset.live];
+  if(!p||!p.url||p.url==="#"){ e.preventDefault(); showToast(t("toast_link")); }
+});
+
+/* ============ language button ============ */
+$("#langBtn").addEventListener("click",()=>{ applyLang(LANG==="ar"?"en":"ar"); location.hash=""; });
+
+/* ============ tilt (desktop only) ============ */
+function bindTilt(el){
+  if(!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  el.addEventListener("mousemove",e=>{
+    const r=el.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    el.style.transform="perspective(800px) rotateX("+(-y*7)+"deg) rotateY("+(x*7)+"deg)";
+  });
+  el.addEventListener("mouseleave",()=>{ el.style.transform=""; });
+}
+bindTilt($("#home .tilt"));
+
+/* ============ init ============ */
+$("#year").textContent=new Date().getFullYear();
+const PHOTO=$("#myPhoto"), phHint=$("#home .ph-hint");
+if(PHOTO.complete&&PHOTO.naturalWidth>0){ if(phHint) phHint.textContent=""; }
+else PHOTO.addEventListener("load",()=>{ if(phHint) phHint.textContent=""; });
+applyLang(document.documentElement.lang==="en"?"en":"ar");
+})();
+});
+</script>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-white/[.06] py-8">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-sm text-zinc-400 sm:flex-row sm:px-8">
+    <p dir="ltr">© <span id="year">2025</span> <span class="font-bold text-zinc-300">Hussein Obeid</span></p>
+    <p class="text-center" data-i18n="ft_built">صُنع بعناية باستخدام HTML و Tailwind CSS و JavaScript نقي ✦</p>
+    <a href="#home" class="inline-flex items-center gap-1.5 font-semibold text-zinc-400 transition hover:text-acid">
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7"/></svg>
+      <span data-i18n="ft_top">أعلى الصفحة</span>
+    </a>
+  </div>
+</footer>
+
+<!-- ============ FLOATING BUTTONS ============ -->
+<a data-wa href="https://wa.me/201043309561" target="_blank" rel="noopener" class="fixed bottom-5 end-5 z-[85] grid size-14 place-items-center rounded-full bg-[#25d366] text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,.55)] transition hover:scale-110 active:scale-95" data-i18n-aria="a11y_wa" aria-label="WhatsApp">
+  <span class="wa-ring" aria-hidden="true"></span>
+  <svg class="relative size-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2A9.96 9.96 0 0 0 2.1 11.96c0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01A9.96 9.96 0 0 0 22 11.92 9.94 9.94 0 0 0 12.04 2Zm5.83 14.06c-.25.7-1.28 1.3-1.93 1.4-.55.08-1.26.12-2.02-.14-.5-.17-1.14-.4-1.96-.8a17.2 17.2 0 0 1-6.02-5.73c-.44-1.6.29-2.9.74-3.42.45-.5 1.06-.6 1.45-.6h.36c.35 0 .65.15.84.53l1.02 2.4c.11.25.1.55-.06.76l-.5.66c-.17.2-.19.48-.07.7a13.5 13.5 0 0 0 5.2 5.02c.24.13.53.1.72-.08l.76-.77c.24-.25.58-.32.88-.2l2.42 1.1c.38.2.53.5.5.83-.03.13-.08.3-.13.44Z"/></svg>
+</a>
+<button id="topBtn" type="button" class="fixed bottom-[5.4rem] end-5 z-[85] grid size-12 place-items-center rounded-full border border-white/10 bg-panel text-zinc-300 opacity-0 transition hover:border-acid/40 hover:text-acid pointer-events-none" data-i18n-aria="a11y_top" aria-label="Back to top">
+  <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7"/></svg>
+</button>
+<div id="toast" role="status" aria-live="polite"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11.5V16"/></svg><span id="toastTxt"></span></div>
+
+<style>
+.nav-solid{background:rgba(5,6,10,.92);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
+</style>
+</body>
+</html>
