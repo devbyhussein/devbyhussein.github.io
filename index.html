@@ -118,8 +118,9 @@ html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
 .scroll-dot{width:4px;height:4px;border-radius:99px;background:var(--acid);animation:scrolldot 1.8s ease-in-out infinite}
 @keyframes marq{to{transform:translateX(-50%)}}
 .marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.014);padding-block:1rem}
-.marq-track{position:relative;z-index:1;display:flex;width:max-content;animation:marq 28s linear infinite}
+.marq-track{position:relative;z-index:1;display:flex;width:max-content;animation:marq 28s linear infinite;will-change:transform}
 .marquee:hover .marq-track{animation-play-state:paused}
+@media (hover:none){html.scr .marq-track{animation-play-state:paused}} /* touch: freeze strip while scrolling = zero compositor work during fling; resumes when idle */
 .marq-in{display:flex;align-items:center;gap:2.4rem;padding-inline:1.2rem;white-space:nowrap}
 .marq-in b{font-family:"Space Grotesk","Cairo",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.09em;color:#8b8d94}
 html[lang="ar"] .marq-in b{letter-spacing:0;font-size:1rem;color:#8b8d94}
@@ -957,6 +958,13 @@ function onScroll(){
 }
 addEventListener("scroll",onScroll,{passive:true}); onScroll();
 topBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+
+/* marquee: freeze on touch scroll (old-GPU friendly), resume ~160ms after last scroll event */
+const MQ_TOUCH=matchMedia("(hover:none)").matches; let mqScrT;
+if(MQ_TOUCH) addEventListener("scroll",()=>{
+  document.documentElement.classList.add("scr");
+  clearTimeout(mqScrT); mqScrT=setTimeout(()=>document.documentElement.classList.remove("scr"),160);
+},{passive:true});
 
 /* active section in nav */
 const spy=new IntersectionObserver(entries=>{
