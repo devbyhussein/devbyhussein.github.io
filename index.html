@@ -124,7 +124,17 @@ html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
 .marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.014);padding-block:1rem}
 .marq-track{position:relative;z-index:1;display:flex;width:max-content;animation:marq 28s linear infinite;will-change:transform}
 .marquee:hover .marq-track{animation-play-state:paused}
-@media (hover:none){.marquee{display:none}} /* touch: hidden — a frozen wide strip reads as cut-off content; desktop keeps motion */
+/* touch: short static band — 2 words + bookend stars, centered, nothing cut off (content ~300px: fits every phone ≥320) */
+@media (hover:none){
+.marquee{display:flex;justify-content:center}
+.marq-track{animation:none;will-change:auto}
+.marq-in{gap:.6rem;padding-inline:.7rem}
+.marquee .marq-track .marq-in b{font-size:.9rem;letter-spacing:.03em}
+#m2{display:none}
+.marq-in b:nth-of-type(n+3){display:none}
+.marq-in .star:nth-of-type(n+3){display:none}
+.marq-in::before{content:"";width:.55rem;height:.55rem;flex:none;background:var(--acid);transform:rotate(45deg);border-radius:2px}
+}
 .marq-in{display:flex;align-items:center;gap:2.4rem;padding-inline:1.2rem;white-space:nowrap}
 .marq-in b{font-family:"Space Grotesk","Cairo",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.09em;color:#8b8d94}
 html[lang="ar"] .marq-in b{letter-spacing:0;font-size:1rem;color:#8b8d94}
