@@ -124,7 +124,7 @@ html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
 .marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.014);padding-block:1rem}
 .marq-track{position:relative;z-index:1;display:flex;width:max-content;animation:marq 28s linear infinite;will-change:transform}
 .marquee:hover .marq-track{animation-play-state:paused}
-@media (hover:none){.marq-track{animation:none;will-change:auto}} /* touch: fully static strip = no permanent GPU layer, zero composite churn */
+@media (hover:none){.marquee{display:none}} /* touch: hidden — a frozen wide strip reads as cut-off content; desktop keeps motion */
 .marq-in{display:flex;align-items:center;gap:2.4rem;padding-inline:1.2rem;white-space:nowrap}
 .marq-in b{font-family:"Space Grotesk","Cairo",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.09em;color:#8b8d94}
 html[lang="ar"] .marq-in b{letter-spacing:0;font-size:1rem;color:#8b8d94}
@@ -170,8 +170,6 @@ html[lang="ar"] .burger span:last-child{margin-top:0}
 .role-word.roll{opacity:0;transform:translateY(10px)}
 .stat-b{padding-inline-start:1.1rem;border-inline-start:1px solid var(--line)}
 .stat-b:first-child{padding-inline-start:0;border-inline-start:0}
-#prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:130;background:linear-gradient(90deg,var(--grape),var(--acid));transform:scaleX(0);transform-origin:left}
-html[dir="rtl"] #prog{transform-origin:right}
 .tilt{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.7,.3,1)!important}
 #toast{position:fixed;bottom:6.8rem;left:50%;margin-left:-160px;width:320px;max-width:86vw;z-index:145;display:flex;align-items:center;justify-content:center;gap:.55rem;text-align:center;background:#161927;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.8rem 1.3rem;font-size:.84rem;font-weight:600;color:#fff;opacity:0;pointer-events:none;transform:translateY(18px);transition:all .35s cubic-bezier(.2,.8,.3,1)}
 #toast.show{opacity:1;transform:translateY(0)}
@@ -248,8 +246,6 @@ html[dir="rtl"] #prog{transform-origin:right}
 
 <body class="noise bg-ink font-grot">
 <a href="#main" data-i18n="a11y_skip" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-[150] focus:rounded-full focus:bg-acid focus:px-5 focus:py-2 focus:text-sm focus:font-bold focus:text-ink">تخطَّ إلى المحتوى</a>
-<div id="prog" aria-hidden="true"></div>
-
 <!-- ================= NAV ================= -->
 <header id="nav" class="fixed inset-x-0 top-0 z-[80] transition-all duration-300">
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-[4.5rem] sm:px-8" aria-label="Main">
@@ -948,13 +944,12 @@ function startRoles(){
 }
 
 /* ============ nav / scroll ============ */
-const nav=$("#nav"), prog=$("#prog"), topBtn=$("#topBtn");
+const nav=$("#nav"), topBtn=$("#topBtn");
 let ticking=false;
 function onScroll(){
   if(ticking) return; ticking=true;
   requestAnimationFrame(()=>{
-    const y=scrollY, dh=document.documentElement.scrollHeight-innerHeight;
-    prog.style.transform="scaleX("+(dh>0?Math.min(y/dh,1):0)+")";
+    const y=scrollY;
     nav.classList.toggle("nav-solid",y>26);
     const show=y>620;
     topBtn.classList.toggle("pointer-events-none",!show);
@@ -1067,7 +1062,7 @@ else{
 <div id="toast" role="status" aria-live="polite"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11.5V16"/></svg><span id="toastTxt"></span></div>
 
 <style>
-.nav-solid{background:rgba(5,6,10,.92);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
+.nav-solid{background:rgba(5,6,10,.97);box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
 </style>
 
 <!-- ================= WEB ANALYTICS (Cloudflare, cookie-free, ~1KB) ================= -->
