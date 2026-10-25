@@ -63,7 +63,13 @@ html,body{overflow-x:hidden}
 body{background:var(--ink);color:#b9bec9;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--acid);color:var(--c-ink)}
 /* big render win: below-the-fold sections skip layout+paint until needed */
-#services,#work,#process,#testimonials,#faq,#contact{content-visibility:auto;contain-intrinsic-size:auto 1200px}
+#services,#work,#process,#testimonials,#faq,#contact{content-visibility:auto}
+#services{contain-intrinsic-size:auto 1550px}
+#work{contain-intrinsic-size:auto 1500px}
+#process{contain-intrinsic-size:auto 760px}
+#testimonials{contain-intrinsic-size:auto 1050px}
+#faq{contain-intrinsic-size:auto 650px}
+#contact{contain-intrinsic-size:auto 800px}
 ::-webkit-scrollbar{width:9px}
 ::-webkit-scrollbar-track{background:var(--ink)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--acid),var(--grape));border-radius:99px}
@@ -84,9 +90,11 @@ img{max-width:100%}
   html{scroll-behavior:auto}
   [data-reveal]{opacity:1!important;transform:none!important}
 }
-/* film grain (static tile = cheap) */
+/* film grain (static tile = cheap) — desktop pointer only (skip compositing blend layer on phones) */
+@media (hover:hover) and (pointer:fine){
 .noise::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+}
 .grad-text{background:linear-gradient(115deg,var(--c-grad-1) 0%,var(--acid) 45%,var(--c-grad-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .stroke-text{-webkit-text-stroke:1px rgba(255,255,255,.14);color:transparent}
 html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
@@ -100,6 +108,7 @@ html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
 .drift-rev{animation:drift 20s ease-in-out infinite alternate-reverse}
 /* ================= MOTIONS ================= */
 @media (hover:none){.drift,.drift-rev{animation:none}} /* static orbs on touch devices = zero GPU cost */
+@media (hover:none){.float,.float-d{animation:none}} /* static hero chips on touch = same */
 @keyframes floaty{from{transform:translateY(6px)}to{transform:translateY(-10px)}}
 .float{animation:floaty 5.5s ease-in-out infinite alternate}
 .float-d{animation:floaty 7s ease-in-out infinite alternate-reverse}

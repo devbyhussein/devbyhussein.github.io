@@ -9,13 +9,13 @@
 | الملف | الوظيفة |
 |---|---|
 | `index.html` | الصفحة كاملة (HTML + CSS مجمّع + JS) |
-| `hussein.webp` | صورتك الشخصية (22KB) |
+| `hussein.webp` | صورتك الشخصية (960×960، 23KB) |
 | `og.jpg` | بطاقة المشاركة عند نشر الرابط (1200×630) |
 | `apple-touch-icon.png` | أيقونة iOS عند "إضافة إلى الشاشة" |
 | `fonts-grot.woff2` | خط Space Grotesk (لاتيني) self-hosted |
 | `fonts-cairo.woff2` | خط Cairo (عربي) self-hosted |
 
-> لا ترفع: أي ملف `in.css`/`out.css`/`node_modules` إن وجد — هذه أدوات بناء محلية فقط.
+> لا ترفع: `hussein-orig.webp` (نسخة الصورة الأصلية الاحتياطية على جهازك فقط)، وأي ملف `in.css`/`out.css`/`node_modules` إن وجد — أدوات بناء محلية.
 
 ## 2) خطوات الرفع على GitHub Pages (دقيقة واحدة)
 
