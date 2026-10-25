@@ -14,6 +14,7 @@
      ================================================================ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if("IntersectionObserver" in window)document.documentElement.classList.add("js");</script>
 <title>حسين عبيد | مطوّر واجهات أمامية وصفحات هبوط</title>
 <meta name="description" id="metaDesc" content="حسين عبيد — مطوّر واجهات أمامية متخصص في صفحات هبوط سريعة التحويل، دقيقة التفاصيل ومتوافقة مع كل الشاشات.">
 <meta name="theme-color" content="#05060a">
@@ -87,6 +88,7 @@ section{scroll-margin-top:5.5rem}
 .faq-x{display:grid;flex:none;place-items:center;width:26px;height:26px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:#a1a1aa;transition:transform .25s ease,border-color .25s ease,color .25s ease}
 .faq-item[open] .faq-x{transform:rotate(45deg);border-color:rgba(var(--acid-rgb),.5);color:var(--acid)}
 .faq-a{padding:.1rem 1.5rem 1.3rem}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid rgba(var(--acid-rgb),.85);outline-offset:3px}
 img{max-width:100%}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -112,10 +114,12 @@ html[lang="ar"] .stroke-text{-webkit-text-stroke:0;color:rgba(255,255,255,.10)}
 /* ================= MOTIONS ================= */
 @media (hover:none){.drift,.drift-rev{animation:none}} /* static orbs on touch devices = zero GPU cost */
 @media (hover:none){.float,.float-d{animation:none}} /* static hero chips on touch = same */
+@media (hover:none){.animate-ping{display:none}} /* badge dot: no infinite pulsing on touch */
+@media (hover:none){.wa-ring{animation:none}} /* floating WA ring: no perpetual pulse layer on touch */
 @keyframes floaty{from{transform:translateY(6px)}to{transform:translateY(-10px)}}
 .float{animation:floaty 5.5s ease-in-out infinite alternate}
 .float-d{animation:floaty 7s ease-in-out infinite alternate-reverse}
-[data-reveal]{opacity:0;transform:translateY(28px) scale(.985)}
+.js [data-reveal]{opacity:0;transform:translateY(28px) scale(.985)}
 [data-reveal].in-view{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}
 @media (hover:none){[data-reveal]{opacity:1!important;transform:none!important;transition:none!important}} /* touch: instant content, no transition churn while flinging */
 @keyframes scrolldot{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(13px)}}
@@ -368,7 +372,7 @@ html[lang="ar"] .burger span:last-child{margin-top:0}
             </div>
           </div>
           <!-- ⬇ PUT YOUR REAL PHOTO NEXT TO index.html AS: hussein.webp -->
-          <img id="myPhoto" src="hussein.webp" alt="" data-i18n-alt="photo_alt" width="480" height="600" fetchpriority="high" decoding="async" class="relative block aspect-[4/5] w-full object-cover object-top" onerror="this.classList.add('img-fail')">
+          <img id="myPhoto" src="hussein.webp" alt="صورة شخصية لـ حسين عبيد — مطوّر واجهات أمامية" data-i18n-alt="photo_alt" width="480" height="600" fetchpriority="high" decoding="async" class="relative block aspect-[4/5] w-full object-cover object-top" onerror="this.classList.add('img-fail')">
           <div class="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/70 to-transparent" aria-hidden="true"></div>
         </div>
       </div>
@@ -889,7 +893,8 @@ function renderProjects(){
 
 /* ============ MARQUEE ============ */
 function renderMarquee(){
-  const html=I18N[LANG].marq.map(x=>'<b>'+esc(x)+'</b><i class="star"></i>').join("");
+  const half=I18N[LANG].marq.map(x=>'<b>'+esc(x)+'</b><i class="star"></i>').join("");
+  const html=half+half;
   const m1=$("#m1"),m2=$("#m2"); if(!m1) return;
   m1.innerHTML=html; m2.innerHTML=html;
 }
@@ -916,13 +921,14 @@ function applyLang(l){
   startRoles(); requestAnimationFrame(collectReveals);
 }
 /* ============ reveal ============ */
-const revealIO=new IntersectionObserver(entries=>{
+const hasIO=("IntersectionObserver" in window);
+const revealIO=hasIO?new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in-view"); revealIO.unobserve(e.target);} });
-},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
-function collectReveals(){ if(matchMedia("(hover:none)").matches) return; $$("[data-reveal]").forEach(el=>revealIO.observe(el)); }
+},{threshold:.12,rootMargin:"0px 0px -6% 0px"}):null;
+function collectReveals(){ if(!revealIO||matchMedia("(hover:none)").matches) return; $$("[data-reveal]").forEach(el=>revealIO.observe(el)); }
 
 /* ============ counters ============ */
-const countIO=new IntersectionObserver(entries=>{
+const countIO=hasIO?new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(!e.isIntersecting) return;
     countIO.unobserve(e.target);
@@ -935,8 +941,9 @@ const countIO=new IntersectionObserver(entries=>{
       if(p<1) requestAnimationFrame(tick);
     })(t0);
   });
-},{threshold:.6});
-$$(".stat-n").forEach(el=>countIO.observe(el));
+},{threshold:.6}):null;
+if(!hasIO){ $$(".stat-n").forEach(el=>el.textContent=el.dataset.count||0); }
+else $$(".stat-n").forEach(el=>countIO.observe(el));
 
 /* ============ roles rotator ============ */
 let roleList=[], roleIdx=0, roleTimer=null;
@@ -973,7 +980,7 @@ topBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
 /* marquee scroll-freeze removed: the strip is fully static on touch (see CSS) so no pause listener is needed */
 
 /* active section in nav */
-const spy=new IntersectionObserver(entries=>{
+const spy=hasIO?new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(!e.isIntersecting) return;
     $$("[data-nav-link]").forEach(a=>{
@@ -982,11 +989,11 @@ const spy=new IntersectionObserver(entries=>{
       if(on) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current");
     });
   });
-},{rootMargin:"-42% 0px -52% 0px"});
-["home","services","work","process","contact"].forEach(id=>{ const s=document.getElementById(id); if(s) spy.observe(s); });
+},{rootMargin:"-42% 0px -52% 0px"}):null;
+["home","services","work","process","contact"].forEach(id=>{ const s=document.getElementById(id); if(s&&spy) spy.observe(s); });
 
 /* ============ mobile menu ============ */
-const ov=$("#ov"), menuBtn=$("#menuBtn");
+const ov=$("#ov"), menuBtn=$("#menuBtn"); let menuLast=null;
 function setMenu(open){
   ov.classList.toggle("open",open);
   ov.classList.toggle("opacity-0",!open);
@@ -994,10 +1001,26 @@ function setMenu(open){
   document.body.classList.toggle("lock",open);
   document.body.style.overflow=open?"hidden":"";
   menuBtn.setAttribute("aria-expanded",open);
+  if(open){ var f=trapList(); f.length&&f[0].focus(); }       /* open: move focus inside (a11y) */
+  else if(menuLast){ menuLast.focus(); menuLast=null; }        /* close: return focus to opener (a11y) */
 }
-menuBtn.addEventListener("click",()=>setMenu(!ov.classList.contains("open")));
+function trapList(){
+  var f=[], els=ov.querySelectorAll("a,button");
+  for(var i=0;i<els.length;i++){ if(els[i].getClientRects().length) f.push(els[i]); }
+  return f;
+}
+menuBtn.addEventListener("click",()=>{ menuLast=menuBtn; setMenu(!ov.classList.contains("open")); });
 $$("[data-nav-link]").forEach(a=>a.addEventListener("click",()=>{ if(ov.classList.contains("open")) setMenu(false); }));
-addEventListener("keydown",e=>{ if(e.key==="Escape"&&ov.classList.contains("open")) setMenu(false); });
+addEventListener("keydown",e=>{
+  if(!ov.classList.contains("open")) return;
+  if(e.key==="Escape"){ menuLast=menuBtn; setMenu(false); }
+  else if(e.key==="Tab"){
+    var f=trapList(); if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+});
 
 /* ============ toast + project link guard ============ */
 const toast=$("#toast"), toastTxt=$("#toastTxt"); let toastT=null;
@@ -1062,7 +1085,7 @@ else{
 </footer>
 
 <!-- ============ FLOATING BUTTONS ============ -->
-<a data-wa href="https://wa.me/201043309561" target="_blank" rel="noopener" class="fixed bottom-5 end-5 z-[85] grid size-14 place-items-center rounded-full bg-[#25d366] text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,.55)] transition hover:scale-110 active:scale-95" data-i18n-aria="a11y_wa" aria-label="WhatsApp">
+<a data-wa href="https://wa.me/201043309561" target="_blank" rel="noopener" class="fixed bottom-5 end-5 z-[85] grid size-14 place-items-center rounded-full bg-[#25d366] text-ink shadow-[0_10px_30px_-6px_rgba(37,211,102,.55)] transition hover:scale-110 active:scale-95" data-i18n-aria="a11y_wa" aria-label="WhatsApp">
   <span class="wa-ring" aria-hidden="true"></span>
   <svg class="relative size-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2A9.96 9.96 0 0 0 2.1 11.96c0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01A9.96 9.96 0 0 0 22 11.92 9.94 9.94 0 0 0 12.04 2Zm5.83 14.06c-.25.7-1.28 1.3-1.93 1.4-.55.08-1.26.12-2.02-.14-.5-.17-1.14-.4-1.96-.8a17.2 17.2 0 0 1-6.02-5.73c-.44-1.6.29-2.9.74-3.42.45-.5 1.06-.6 1.45-.6h.36c.35 0 .65.15.84.53l1.02 2.4c.11.25.1.55-.06.76l-.5.66c-.17.2-.19.48-.07.7a13.5 13.5 0 0 0 5.2 5.02c.24.13.53.1.72-.08l.76-.77c.24-.25.58-.32.88-.2l2.42 1.1c.38.2.53.5.5.83-.03.13-.08.3-.13.44Z"/></svg>
 </a>
